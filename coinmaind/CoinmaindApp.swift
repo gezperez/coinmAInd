@@ -50,19 +50,6 @@ struct CoinmaindApp: App {
         UserDefaults.standard.set(true, forKey: hasSeenOnboardingKey)
     }
     
-    private func renderFirstScreen() -> some View {
-        Group {
-            if shouldShowOnboarding() {
-                OnboardingView()
-                    .onDisappear {
-                        markOnboardingAsShown()
-                    }
-            } else {
-                LoginView()
-            }
-        }
-    }
-    
     init() {
         iOSDesignSystem.registerFonts()
     }
@@ -70,7 +57,7 @@ struct CoinmaindApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $router.navPath) {
-                renderFirstScreen()
+                SplashView()
                     .navigationDestination(for: Router.Destination.self) { destination in
                         switch destination {
                             case .home:
