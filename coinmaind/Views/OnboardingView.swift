@@ -30,6 +30,7 @@ struct OnboardingView: View {
     }
     
     private func navigateToLogin() {
+        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
         router.navigate(to: .login)
     }
     
